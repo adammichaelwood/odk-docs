@@ -25,29 +25,95 @@
   todos
   totales
 
-Updating forms
-=================
+Updating and Versioning Forms
+==============================
 
-.. _change-existing:
+The Open Data Kit tools support form versioning.
+That is, 
+a form definition file can be updated as needed
+without being treated as a separate form.
+Each update needs to have a unique version number string,
+and the data model of the form cannot change between versions.
 
-Making changes to existing form
+.. _what-changes:
+
+What can and cannot be changed
 ---------------------------------
 
-Certain changes which don't involve adding or removing a question can be made without needing to replace the existing forms. The kind of changes are:
+You can make any of the following changes to a form
+and continue to use it as an update version of the same form.
 
-- Changing the text or translation of a label
-- Changing validations, calculations, relevants
-- Changing options for a select_one or select_multiple
-- Changing the order of questions
-- Adding translations
-- Updating media including CSVs for your form
+- Edit the text of a question, choice, or group :th:`label`
+- Edit the text of a :th:`hint`
+- Add, remove, or edit 
+  :doc:`translations <form-language>` of labels or hints.
+- Add, remove, or edit 
+  :th:`constraint`, :th:`relevant`, or :th:`required` values on any question.
+- Edit a :th:`calculation`.
+- Change the number of times a repeat group will loop. 
+- Add, remove, or edit choices for select questions.
+- Re-order questions.
+- Change external media and data files.
+- Move select choices to or from the **choices** sheet,
+  from or to external data files.
+- Change the :th:`form_title`.
+- Change the :th:`default_language`.
 
-For such changes you can update the version and re-upload the form. 
+Any change the affects the data model of the form
+will require treating the update as a new form.
+These changes include:
+
+- Adding or removing questions or repeat groups.
+- Changing the :th:`name` of questions or repeat groups.
+- Changing the :th:`form_id`.
+
 
 .. note::
 
-  - If you add new media files or update existing media files for your form without any change in the form definition file or :file:`.xml` file, you don't need to change the version.
-  - If you have used external select and add, update or delete the choices in external :file:`.csv` file without any change in the form definition file or :file:`.xml` file, you don't need to change the version. For more details on using external choices in your form, see `this <http://xlsform.org/#external>`_
+  If you add or update media files
+  or external data files
+  without any change in the form definition file, 
+  you don't need to increment the version number.
+  
+  However, you may wish to do so 
+  in order to keep a clear history of form's changes over time.
+  In that case, we recommend that you:
+  
+  #. Add a version number to the file name.
+  #. Update the reference to that file name in the form. 
+  #. Increment the form's version number.
+    
+
+Incrementing the version number
+-----------------------------------
+
+In an XLSForm the version number is defined in 
+in the :th:`version` column of `the settings worksheet`_.
+
+.. _the settings worksheet: http://xlsform.org/#settings
+
+.. csv-table:: settings
+  :header: form_title, form_id, version    
+    
+  Example Form, example_form, 2018071501
+  
+The form version attribute can be a string containing numbers or letters.
+When updating a form and incrementing a version,
+the new version string must be "higher" (or "come after") the old version.
+
+Version sequencing 
+(that is, determining which version is later or earlier)
+relies on `lexical ordering`_, not numeric ordering.
+This means that ``10`` will come before ``2``,
+unless you use leading zeroes so that ``02`` will come before ``10``.
+
+.. _lexical ordering: https://en.wikipedia.org/wiki/Lexicographical_order
+
+To deal with this, 
+and to make form versioning as consistent as possible,
+
+
+
 
 .. tip::
 
