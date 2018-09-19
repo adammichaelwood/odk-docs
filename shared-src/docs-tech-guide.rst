@@ -810,7 +810,7 @@ on any computer.
             (odkenv) /odk/docs/ > pip install -r requirements.txt
 
    The first command `upgrades pip`_ itself to the latest version.
-   Then second checks :file:`requirements.txt` and installs everything listed in it.
+   The second checks :file:`requirements.txt` and installs everything listed in it.
    This will take several moments.
 
    .. _upgrades pip: https://pip.pypa.io/en/stable/installing/#upgrading-pip
