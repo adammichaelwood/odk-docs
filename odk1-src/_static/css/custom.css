@@ -297,3 +297,65 @@ div[class^='unwrap'] pre {
 }
 
 /* Utility classes ends */
+
+
+/* Temporary print styles for AMW generating writing samples. */
+/* If you see this, and you aren't Adam, Adam messed up his commits. */
+
+@media print {
+
+div#initial-setup, div#the-next-time-you-work {
+   page-break-before: always;
+}
+
+span.toggler {
+   display: none;
+}
+
+li.has-details p:first-of-type::after {
+   content: " | Details hidden for brevity in this sample.";
+   color: lightslategray;
+   font-size: 10px;
+   font-weight: normal;
+   font-style: italic;
+}
+
+li.has-details.details-displayed p:first-of-type::after {
+   content: ""
+}
+
+span.toggler.showing {
+   display: none;
+}
+
+.admonition {
+   margin-left: 6px;
+   border-left: solid 2px gray;
+   padding-left: 12px;
+}
+
+div.sphinx-tabs.container {
+   page-break-inside: avoid;
+}
+
+.sphinx-tabs .sphinx-menu a.item {
+
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+}
+
+.ui.menu.tabular {
+   min-height: 0;
+   height: 24px;
+}
+
+strong.command {
+   font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
+   font-weight: normal;
+}
+
+
+
+}
+
+/* End AMW one-off print styles which you shouldn't be seeing anyway. */

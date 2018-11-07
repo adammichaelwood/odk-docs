@@ -20,7 +20,7 @@ $(function(){
     $(".details").each(function(index){
 	id = id + 1;
 	$(this).attr('id', id);
-	togl = "<span class='toggler hiding' data-toggle='" + id + "'></span><br>";
+	togl = "<span class='toggler hiding' data-toggle='" + id + "'></span>";
 	$(this).before(togl);
 	$(this).addClass('hidden');
 	$(this).has("img:only-child").addClass('screenshot-only');
@@ -36,8 +36,8 @@ $(function(){
     });
 
     // Define the toggler labels
-    hiding_label = "[<span class='toggle-sign'>&plus;</span>] show details";
-    showing_label = "[<span class='toggle-sign'>&minus;</span>] hide details";
+    hiding_label = "Details hidden for brevity in this sample.<br>";
+    showing_label = " ";
     ss_hiding_label = "[<span class='toggle-sign'>&plus;</span>] show screenshot";
     ss_showing_label = "[<span class='toggle-sign'>&minus;</span>] hide screenshot";
     code_hiding_label = "[<span class='toggle-sign'>&plus;</span>] show code<br>";
@@ -56,8 +56,10 @@ $(function(){
 	$(this).click(function(e){
 	    toggle_image = $('#' + $(this).attr('data-toggle'));
 	    if ($(this).hasClass('hiding')) {
-		$(this).removeClass('hiding');
-		toggle_image.removeClass("hidden");
+      $(this).removeClass('hiding');
+      $(this).addClass('showing');
+      toggle_image.removeClass("hidden");
+      toggle_image.addClass("not-hidden");
 		if ($(this).siblings().hasClass('screenshot-only')) {
 		    $(this).html(ss_showing_label);
 		} else if ($(this).siblings().hasClass('code-only')) {
@@ -66,8 +68,10 @@ $(function(){
 		    $(this).html(showing_label);
 		}
 	    } else {
-		$(this).addClass('hiding');
-		toggle_image.addClass("hidden");
+      $(this).addClass('hiding');
+      $(this).removeClass('showing');
+      toggle_image.addClass("hidden");
+      toggle_image.removeClass("not-hidden");
 		if ($(this).siblings().hasClass('screenshot-only')) {
 		    $(this).html(ss_hiding_label);
 		} else if ($(this).siblings().hasClass('code-only')) {
@@ -75,10 +79,15 @@ $(function(){
 		} else {
 		    $(this).html(hiding_label);
 		}
-	    }
+       }
+       $('li:has(> div.not-hidden)').addClass('details-displayed');
 	})
     });    
 });
+
+// AMW special 
+
+
 
 
 // Add a class to dt elements

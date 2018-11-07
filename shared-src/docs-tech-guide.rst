@@ -58,8 +58,8 @@ and the :ref:`ODK Forum <join-forum>`
 
       If you are willing and able to do so,
       a profile picture in each place is also very helpful.
-      (But it is okay if you are unable or uncomfortable
-      adding a picture.)
+      (But it is okay if you are unable to,
+      or uncomfortable adding a picture.)
 
 #. Set up a `GitHub`_ account.
 
@@ -167,20 +167,9 @@ and the :ref:`ODK Forum <join-forum>`
 Initial Setup
 -------------
 
-.. note::
-
-  Developer and authoring tools 
-  have a lot of options and alternatives. 
-  Local tools and workflows presented in this guide 
-  are what the authors feel would be easiest 
-  for newcomers and those unfamiliar with open source.
-  
-  You should feel free to use your preferred tools.
-
 Before you begin working the first time
 you will need to install a few tools 
 on your computer.
-
 You should only need to do this one time
 on any computer.
 
@@ -204,7 +193,7 @@ on any computer.
          .. _Run as Administrator: https://docs.microsoft.com/en-us/powershell/scripting/setup/starting-windows-powershell?view=powershell-6#with-administrative-privileges-run-as-administrator
 
          Throughout the rest of the instructions in this guide,
-         follow the instructions labelled **PowerShell** or **Windows**.
+         follow the instructions labeled **PowerShell** or **Windows**.
 
          .. rubric:: Windows 10
 
@@ -522,7 +511,7 @@ on any computer.
             .. _win-64-or-32:
             .. admonition:: 64-bit or 32-bit?
 
-               Well over 90% of copmuters running Windows are 64-bit.
+               Well over 90% of computers running Windows are 64-bit.
                So you probably need the 64-bit version.
 
                If you are running a very old or low-powered computer,
@@ -748,10 +737,8 @@ on any computer.
    In git, a :dfn:`remote` is a copy of a repo somewhere else.
    From your local computer's point of view,
    your online copy at GitHub is a remote.
-
    When you cloned down a repo, 
    your local copy gives your GitHub copy the name ``origin``.
-
    You also need to give the primary ODK Docs repo a name,
    and our convention is to name it ``upstream``.
 
@@ -774,14 +761,6 @@ on any computer.
          .. code:: powershell
 
             (odkenv) /odk/docs/ > git remote add upstream https://github.com/opendatakit/docs.git
-            (odkenv) /odk/docs/ > git remote -v
-            origin https://github.com/your-github-username/docs.git (fetch)
-            origin https://github.com/your-github-username/docs.git (push)
-            upstream https://github.com/opendatakit/docs.git (fetch)
-            upstream https://github.com/opendatakit/docs.git (push)
-
-   If everything went right,
-   you should see output similar to what is shown above.
 
 #. Install Python tools with pip
 
@@ -824,45 +803,6 @@ on any computer.
       Run the installation again
       and then retry your build.
 
-#. Choose a text/code editor
-
-   .. _choose-editor:
-
-   The documentation source files are written in a plain text format called `reStructuredText`_.
-   This means special formatting (bullets, headers, bold text) is represented by visible characters,
-   not hidden behind a graphical display.
-   When working on a documentation file, 
-   you see and write something that looks like:
-
-   .. _reStructuredText: http://docutils.sourceforge.net/docs/user/rst/quickref.html
-
-   .. code:: rst
-
-      #. Choose a text/code editor
-
-         The documentation source files 
-         are written in a plain text format called `reStructuredText`_.
-
-         .. _reStructuredText: http://docutils.sourceforge.net/docs/user/rst/quickref.html
-
-   You cannot write and edit these files
-   in a typical document preparation program like :program:`MS Word` or :program:`Google Docs`.
-   Instead, you need a coding editor.
-
-   There are a lot of editors, 
-   and people who use them often have very strong opinions about them.
-   You are free to choose any editor you like.
-
-   If you've never used an editor before, 
-   you might want to start with one of the easier and more popular ones:
-
-   - `Atom <https://atom.io/>`_
-   - `Sublime <https://www.sublimetext.com/>`_
-   - `VS Code <https://code.visualstudio.com/>`_
-   - `Notebook++ <https://notepad-plus-plus.org/>`_ (Windows only)
-
-   Most of these have plugins that will make writing reStructuredText easier
-   by color-coding the markup.
 
 This completes the setup of your local working environment.
 Take a break before diving into how you actually work.
@@ -1075,7 +1015,7 @@ Working on the docs
    
    - :doc:`docs-developer-guide`
 
-#. Local checks
+#. Run local tests.
 
    .. _test-the-docs:
 
@@ -1090,8 +1030,6 @@ Working on the docs
    #. Spell check
 
       .. _spell-check:
-
-      If you've been working on files in :file:`odk1-src` or :file:`shared-src`:
 
       .. tabs::
 
@@ -1111,27 +1049,6 @@ Working on the docs
                (odkenv) /odk/docs/ > Copy-Item shared-src -Destination tmp1-src -Recurse
                (odkenv) /odk/docs/ > sphinx-build -b spelling tmp1-src odk1-build/spelling
                (odkenv) /odk/docs/ > python util/check-spelling-output.py odk1-build
-
-      If you've been working on files in :file:`odk2-src`:
-
-      .. tabs::
-
-         .. group-tab:: Bash
-
-            .. code:: console
-            
-               (odkenv) /odk/docs/ $ make odk2-spell-check
-
-         .. group-tab:: PowerShell
-
-            .. code:: powershell
-
-               (odkenv) /odk/docs/ > rm -r -fo tmp2-src
-               (odkenv) /odk/docs/ > rm -r -fo odk2-build
-               (odkenv) /odk/docs/ > Copy-Item odk2-src -Destination tmp2-src -Recurse
-               (odkenv) /odk/docs/ > Copy-Item shared-src -Destination tmp2-src -Recurse
-               (odkenv) /odk/docs/ > sphinx-build -b spelling tmp1-src odk2-build/spelling
-               (odkenv) /odk/docs/ > python util/check-spelling-output.py odk2-build
 
 
       This will send some output to the terminal,
@@ -1162,9 +1079,11 @@ Working on the docs
       When adding new words to :file:`spelling_wordlist.txt` or the top of a document file,
       please keep the words in alphabetical order.
 
-   #. Style check 
+   #. Style check
 
-#. Build and check
+      Some hidden details here.
+
+#. Run the build. Correct errors and warnings.
 
    .. _build-the-docs:
 
@@ -1172,8 +1091,6 @@ Working on the docs
    to compile all the :file:`.rst` files into a working website.
 
    .. _Sphinx: http://www.sphinx-doc.org
-
-   If you've been working on files in :file:`odk1-src` or :file:`shared-src`:
 
    .. tabs::
 
@@ -1192,26 +1109,6 @@ Working on the docs
             (odkenv) /odk/docs/ > Copy-Item odk1-src -Destination tmp1-src -Recurse
             (odkenv) /odk/docs/ > Copy-Item shared-src -Destination tmp1-src -Recurse
             (odkenv) /odk/docs/ > sphinx-build -b dirhtml tmp1-src odk1-build
-
-   If you've been working on files in :file:`odk2-src`:
-
-   .. tabs::
-
-      .. group-tab:: Bash
-
-         .. code:: console
-
-            make odk2
-
-      .. group-tab:: PowerShell
-
-         .. code:: powershell
-
-            (odkenv) /odk/docs/ > rm -r -fo tmp2-src
-            (odkenv) /odk/docs/ > rm -r -fo odk2-build
-            (odkenv) /odk/docs/ > Copy-Item odk2-src -Destination tmp2-src -Recurse
-            (odkenv) /odk/docs/ > Copy-Item shared-src -Destination tmp2-src -Recurse
-            (odkenv) /odk/docs/ > sphinx-build -b dirhtml tmp2-src odk2-build
 
    This generates a lot of output.
    Near the end of the output you may see a statement like:
@@ -1240,24 +1137,8 @@ Working on the docs
    If you can not figure out the meaning of a particular warning,
    you can always ask about it on the |odk-slack|_.
 
-   .. note::
-
-      Because of a `bug in Sphinx`_ 
-      the line numbers in error and warning messages 
-      will be off by about 15 lines
-      (the length of ``rst_prolog`` in :file:`conf.py`).
-
-      .. _bug in Sphinx: https://github.com/sphinx-doc/sphinx/issues/2617
-
    As you fix each warning,
    run the build again to see if it disappears from the output.
-
-   .. note::
-
-      The warning messages will refer to the file name
-      using the temporary directory path :file:`tmp1-src` or :file:`tmp2-src`.
-      You need to correct the problems in the real source directory
-      (:file:`odk1-src`, :file:`odk2-src`, or :file:`shared-src`).
 
    .. admonition:: When you just can't fix the error...
 
@@ -1273,8 +1154,6 @@ Working on the docs
 #. Serve the documentation website locally and view it.
 
    .. _serve-the-docs-locally:
-
-   If you've been working on files in :file:`odk1-src` or :file:`shared-src`:
 
    .. tabs::
 
@@ -1292,24 +1171,7 @@ Working on the docs
             (odkenv) /odk/docs/ > python -m http.server -d odk1-build 8000
             Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)
 
-   If you've been working on files in :file:`odk2-src`:
-
-   .. tabs::
-
-      .. group-tab:: Bash
-
-         .. code:: console
-
-            (odkenv) /odk/docs/ $ python -m http.server -d odk2-build 8000
-            Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)
-
-      .. group-tab:: PowerShell
-
-         .. code:: powershell
-
-            (odkenv) /odk/docs/ > python -m http.server -d odk2-build 8000
-            Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)
-
+ 
    #. Open your browser and go to http://localhost:8000.
    #. Read through your doc edits in the browser.
    #. Go back to the source files to correct any errors you find.
@@ -1323,7 +1185,7 @@ Working on the docs
 
    .. _commit-the-docs:
 
-   A :dfn:`commit` is snaphot of your working files in a particular state,
+   A :dfn:`commit` is snapshot of your working files in a particular state,
    along with a record of all the changes that led up to that state.
    That snapshot is what you will submit to the main repository.
 
@@ -1374,7 +1236,7 @@ Working on the docs
       Your commit message needs to be wrapped in quote marks.
       It should, in a sentence or less, explain your work.
 
-#. Push your commited changes to your GitHub repo with :command:`git push`.
+#. Push your committed changes to your GitHub repo with :command:`git push`.
 
    .. _push-the-docs:
 
@@ -1402,7 +1264,7 @@ Working on the docs
       .. tip::
 
          You may be prompted to enter your GitHub username and password.
-         When entering your password, the curser won't move --- 
+         When entering your password, the cursor won't move --- 
          it will look like you aren't entering anything,
          even though you are.
 
